@@ -5,10 +5,14 @@ import { StatusBar } from 'expo-status-bar';
 import moment from 'moment';
 import Storage from 'react-native-storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+
 
 // https://github.com/wix/react-native-calendars/issues/335
 export const calendarScreen = () => {
     
+    const navigation = useNavigation();
+
     // アジェンダ内容のJSXを返す関数
     const renderItem = (item, firstItemInDay) => {
         return (
@@ -29,7 +33,7 @@ export const calendarScreen = () => {
     const items = {
         '2021-05-22': [{name: 'aiueo',start: '2021-05-22T13:45:00',end: '2021-05-22T20:45:00'},{name: 'item 1 - any js object'},],
         '2021-05-23': [{name: 'item 2 - any js object', height: 80}],
-        '2021-05-24': [],
+        '2021-05-24': [{name: 'にじゅうよん'}],
         '2021-05-25': [{name: 'i'}, {name: 'any js object'}]
     }
     const markedDates = {
@@ -42,17 +46,22 @@ export const calendarScreen = () => {
     const storage = new Storage({
         storageBackend: AsyncStorage
     })
-    const [items2, setItems2] = useState([])
+    const [items2, setItems2] = useState();
 
-    const loadData = () => {
-        storage
-        .load({key: 'test1'})
-        .then(res => {
-            setItems2(res.items)
-        })
-        .catch(err => console.warn(err))
-    }
-    //
+    // calendar画面を表示したときにデータをロードする処理
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            storage
+            .load({key: 'test1'})
+            .then(res => {
+                setItems2(res.items)
+            })
+            .catch(err => console.warn(err))
+            });
+            console.log('succeed!')
+        return unsubscribe;
+    }, [items2]);
+    
 
 
     return (
@@ -63,7 +72,6 @@ export const calendarScreen = () => {
                 renderItem={(item, firstItemInDay) => { return (renderItem(item, firstItemInDay))}}
                 markedDates={markedDates}
                 markingType={'multi-dot'}
-                onDayPress={(day)=>{loadData();console.log(items2)}}
             />
         </View>
     );

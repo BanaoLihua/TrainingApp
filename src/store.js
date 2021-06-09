@@ -17,6 +17,9 @@ export const saveData = () => {
                 ],
                 '2021-06-10': [
                     {name: 'mirai'}
+                ],
+                '2021-06-11': [
+                    {name: '十一日aiueo'}
                 ]
             }
         }
@@ -24,9 +27,11 @@ export const saveData = () => {
 }
 
 // 読込処理
+/*
 export const loadData = () => {
     storage
     .load({key: 'test1'})
     .then(res => res.items)
     .catch(err => console.warn(err))
 }
+*/
