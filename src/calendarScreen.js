@@ -1,15 +1,16 @@
-import * as React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import { StatusBar } from 'expo-status-bar';
 import moment from 'moment';
+import Storage from 'react-native-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // https://github.com/wix/react-native-calendars/issues/335
 export const calendarScreen = () => {
     
     // アジェンダ内容のJSXを返す関数
     const renderItem = (item, firstItemInDay) => {
-        console.log('rendering', item)
         return (
           <TouchableOpacity>
             <Text style={{color: 'black'}}>{moment(item.start).format("hh:mm a")}</Text>
@@ -37,15 +38,32 @@ export const calendarScreen = () => {
         '2021-05-18': {disabled: true}
     }
 
+    //
+    const storage = new Storage({
+        storageBackend: AsyncStorage
+    })
+    const [items2, setItems2] = useState([])
+
+    const loadData = () => {
+        storage
+        .load({key: 'test1'})
+        .then(res => {
+            setItems2(res.items)
+        })
+        .catch(err => console.warn(err))
+    }
+    //
+
 
     return (
         <View style={{ flex: 1, justifyContent: 'center' }}>
             <StatusBar />
             <Agenda
-                items={items}
+                items={items2}
                 renderItem={(item, firstItemInDay) => { return (renderItem(item, firstItemInDay))}}
                 markedDates={markedDates}
                 markingType={'multi-dot'}
+                onDayPress={(day)=>{loadData();console.log(items2)}}
             />
         </View>
     );
