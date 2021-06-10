@@ -11,6 +11,27 @@ export const addNewScreen = () => {
     const [text, setText] = useState('');
     const [today, setToday] = useState('');
 
+    //
+    const store = {
+        key: 'item',
+        data: {
+            items: {}
+        }
+    };
+    const [oldData, setOldData] = useState({
+        key: 'item',
+        data: {
+            items: {}
+        }
+    });
+    const loadData = () => {
+        storage.load({key: 'item'})
+        .then(res => {setOldData(res)})
+        .catch(err => {console.warn(err)})
+    }
+
+    //
+
     const storage = new Storage({
         storageBackend: AsyncStorage
     })
@@ -27,15 +48,20 @@ export const addNewScreen = () => {
     // オブジェクトのキー名に変数を指定したい
     const onPressSave = () => {
         const keyName = getNowYMD();
-        const store = {
-            key: 'item',
-            data: {
-                items: {}
-            }
-        };
+        const keyName2 = '2021-06-10';
         store.data.items[keyName] = [{name: text}];
-        storage.save(store);
+        oldData.items[keyName2] = [{name: text}];
+        console.log(store.data.items);
+        console.log(oldData.items);
+        //storage.save(store);
     }
+
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            loadData();
+        });
+        return unsubscribe;
+    }, [navigation]);
 
     const navigation = useNavigation();
     return (
