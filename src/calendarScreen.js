@@ -52,7 +52,7 @@ export const calendarScreen = () => {
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
             storage
-            .load({key: 'test1'})
+            .load({key: 'item'})
             .then(res => {
                 setItems2(res.items)
             })
