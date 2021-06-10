@@ -48,12 +48,15 @@ export const addNewScreen = () => {
     // オブジェクトのキー名に変数を指定したい
     const onPressSave = () => {
         const keyName = getNowYMD();
-        const keyName2 = '2021-06-10';
+        const keyName2 = '2021-06-09';
         store.data.items[keyName] = [{name: text}];
         oldData.items[keyName2] = [{name: text}];
         console.log(store.data.items);
         console.log(oldData.items);
-        //storage.save(store);
+        storage.save({
+            key: 'item',
+            data: oldData
+        });
     }
 
     useEffect(() => {
