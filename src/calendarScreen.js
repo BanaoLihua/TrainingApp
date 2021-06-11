@@ -36,10 +36,18 @@ export const calendarScreen = () => {
         '2021-05-24': [{name: 'にじゅうよん'}],
         '2021-05-25': [{name: 'i'}, {name: 'any js object'}]
     }
-    const markedDates = {
+    const markedDates2 = {
         '2021-05-16': {dots: [type1, type2, type3, type4], marked: true},
         '2021-05-17': {dots: [type1, type4], marked: true},
         '2021-05-18': {disabled: true}
+    }
+    const markedDates = {
+        '2021-05-20': {textColor: 'green'},
+        '2021-05-21': {startingDay: true, endingDay: true, color: 'lightgreen'},
+        '2021-05-22': {startingDay: true, endingDay: true, color: 'lightgreen'},
+        '2021-05-23': {startingDay: true, endingDay: true, color: 'lightgreen'},
+        '2021-05-24': {selected: true, endingDay: true, color: 'green', textColor: 'gray'},
+        '2021-05-04': {disabled: true, startingDay: true, color: 'green', endingDay: true}
     }
 
     //
@@ -70,7 +78,7 @@ export const calendarScreen = () => {
             <Agenda
                 items={items2}
                 renderItem={(item, firstItemInDay) => { return (renderItem(item, firstItemInDay))}}
-                markedDates={markedDates}
+                markedDates={markedDates2}
                 markingType={'multi-dot'}
             />
         </View>

@@ -11,10 +11,7 @@ export const addNewScreen = () => {
     const [text, setText] = useState('');
 
     const [oldData, setOldData] = useState({
-        key: 'item',
-        data: {
-            items: {}
-        }
+        items: {}
     });
 
     const loadData = () => {
