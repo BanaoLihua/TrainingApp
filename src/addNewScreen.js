@@ -9,28 +9,19 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export const addNewScreen = () => {
 
     const [text, setText] = useState('');
-    const [today, setToday] = useState('');
 
-    //
-    const store = {
-        key: 'item',
-        data: {
-            items: {}
-        }
-    };
     const [oldData, setOldData] = useState({
         key: 'item',
         data: {
             items: {}
         }
     });
+
     const loadData = () => {
         storage.load({key: 'item'})
         .then(res => {setOldData(res)})
         .catch(err => {console.warn(err)})
     }
-
-    //
 
     const storage = new Storage({
         storageBackend: AsyncStorage
@@ -45,14 +36,10 @@ export const addNewScreen = () => {
         return [y, m, d].join('-');
     }
 
-    // オブジェクトのキー名に変数を指定したい
+    // 保存処理
     const onPressSave = () => {
         const keyName = getNowYMD();
-        const keyName2 = '2021-06-09';
-        store.data.items[keyName] = [{name: text}];
-        oldData.items[keyName2] = [{name: text}];
-        console.log(store.data.items);
-        console.log(oldData.items);
+        oldData.items[keyName] = [{name: text}];
         storage.save({
             key: 'item',
             data: oldData
