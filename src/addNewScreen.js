@@ -73,7 +73,7 @@ export const addNewScreen = () => {
     }, [navigation]);
 
     // 部位選択
-    // Todo: case分の中の三項方程式の正負が逆な件
+    // Todo: case文の中の三項方程式の正負が逆な件
     const selectPart = (part) => {
         switch(part) {
             case 'shoulder':
