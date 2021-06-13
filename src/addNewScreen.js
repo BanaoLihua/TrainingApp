@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 //import { saveData } from './store';
 import { useNavigation } from '@react-navigation/native';
 //import { Button, TextInput } from 'react-native-paper';
@@ -19,7 +19,9 @@ export const addNewScreen = () => {
         items: {}
     });
 
-    const [weightData, setWeightData] = useState({})
+    const [weightData, setWeightData] = useState({});
+
+    const [partsData, setPartsData] = useState({})
 
     // 部位選択
     const [selectedItems, setSelectedItems] = useState({ 
@@ -66,6 +68,17 @@ export const addNewScreen = () => {
             key: 'weight',
             data: weightData
         })
+    }
+
+    // selectedItemsを整形する処理
+    const selectedItemsConverter = () => {
+        const newPartsData = { dots: [] };
+        for(const selectedItem in selectedItems) {
+            if(selectedItems[selectedItem][0]) {
+                newPartsData.dots.push(selectedItem);
+            }
+        }
+        console.log(newPartsData);
     }
 
     useEffect(() => {
@@ -144,12 +157,7 @@ export const addNewScreen = () => {
     }
 
     const onPressTest = () => {
-        console.log(weightData);
-        storage.load({key: 'weight'})
-        .then(res => {
-            console.log(res);
-        })
-        .catch(err => {console.warn})
+        selectedItemsConverter();
     }
 
     const navigation = useNavigation();
@@ -173,7 +181,7 @@ export const addNewScreen = () => {
                 keyboardType="numeric"
                 onChangeText={weight => setWeight(weight)}
             />
-            <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', margin: 10}}>
+            <View style={styles.partsSelection}>
                 
                 <Icon name={selectedItems.shoulder[1]} 
                     　size={30} 
@@ -219,3 +227,12 @@ export const addNewScreen = () => {
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    partsSelection: {
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        margin: 10
+    }
+})

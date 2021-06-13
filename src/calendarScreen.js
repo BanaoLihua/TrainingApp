@@ -37,7 +37,7 @@ export const calendarScreen = () => {
         '2021-05-25': [{name: 'i'}, {name: 'any js object'}]
     }
     const markedDates2 = {
-        '2021-05-16': {dots: [type1, type2, type3, type4], marked: true},
+        '2021-05-16': {dots: [type1, type2, type3, type4]},
         '2021-05-17': {dots: [type1, type4], marked: true},
         '2021-05-18': {disabled: true}
     }
