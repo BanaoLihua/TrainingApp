@@ -13,9 +13,13 @@ export const addNewScreen = () => {
 
     const [text, setText] = useState('');
 
+    const [weight, setWeight] = useState();
+
     const [oldData, setOldData] = useState({
         items: {}
     });
+
+    const [weightData, setWeightData] = useState({})
 
     // 部位選択
     const [selectedItems, setSelectedItems] = useState({ 
@@ -30,7 +34,10 @@ export const addNewScreen = () => {
     const loadData = () => {
         storage.load({key: 'item'})
         .then(res => {setOldData(res)})
-        .catch(err => {console.warn(err)})
+        .catch(err => {console.warn(err)});
+        storage.load({key: 'weight'})
+        .then(res => {setWeightData(res)})
+        .catch(err => {console.warn(err)});
     }
 
     const storage = new Storage({
@@ -50,10 +57,15 @@ export const addNewScreen = () => {
     const onPressSave = () => {
         const keyName = getNowYMD();
         oldData.items[keyName] = [{name: text}];
+        weightData[keyName] = weight;
         storage.save({
             key: 'item',
             data: oldData
         });
+        storage.save({
+            key: 'weight',
+            data: weightData
+        })
     }
 
     useEffect(() => {
@@ -132,7 +144,12 @@ export const addNewScreen = () => {
     }
 
     const onPressTest = () => {
-        console.log(selectedItems);
+        console.log(weightData);
+        storage.load({key: 'weight'})
+        .then(res => {
+            console.log(res);
+        })
+        .catch(err => {console.warn})
     }
 
     const navigation = useNavigation();
@@ -151,9 +168,10 @@ export const addNewScreen = () => {
                    onChangeText={text => setText(text)}
             />
             <Input
-                value="50"
+                value={weight}
                 label="Weight"
                 keyboardType="numeric"
+                onChangeText={weight => setWeight(weight)}
             />
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', margin: 10}}>
                 
