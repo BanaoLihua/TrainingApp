@@ -71,7 +71,11 @@ export const addNewScreen = () => {
                 setSelectedItems({ 
                     ...selectedItems, 
                     shoulder: [!selectedItems.shoulder[0], 
-                                selectedItems.shoulder[0] ? selectedItems.shoulder[1] = 'circle' : selectedItems.shoulder[1] = 'check-circle'
+                                selectedItems.shoulder[0] 
+                                ? selectedItems.shoulder[1] 
+                                = 'circle' 
+                                : selectedItems.shoulder[1] 
+                                = 'check-circle'
                               ] 
                 });
                 break;
@@ -79,7 +83,11 @@ export const addNewScreen = () => {
                 setSelectedItems({ 
                     ...selectedItems, 
                     arm: [!selectedItems.arm[0], 
-                                selectedItems.arm[0] ? selectedItems.arm[1] = 'circle' : selectedItems.arm[1] = 'check-circle'
+                                selectedItems.arm[0] 
+                                ? selectedItems.arm[1] 
+                                = 'circle' 
+                                : selectedItems.arm[1] 
+                                = 'check-circle'
                          ] 
                 });
                 break;
@@ -87,7 +95,11 @@ export const addNewScreen = () => {
                 setSelectedItems({ 
                     ...selectedItems, 
                     chest: [!selectedItems.chest[0], 
-                                selectedItems.chest[0] ? selectedItems.chest[1] = 'circle' : selectedItems.chest[1] = 'check-circle'
+                                selectedItems.chest[0] 
+                                ? selectedItems.chest[1] 
+                                = 'circle' 
+                                : selectedItems.chest[1] 
+                                = 'check-circle'
                            ] 
                 });
                 break;
@@ -95,7 +107,11 @@ export const addNewScreen = () => {
                 setSelectedItems({ 
                     ...selectedItems, 
                     stomach: [!selectedItems.stomach[0], 
-                                selectedItems.stomach[0] ? selectedItems.stomach[1] = 'circle' : selectedItems.stomach[1] = 'check-circle'
+                                selectedItems.stomach[0] 
+                                ? selectedItems.stomach[1] 
+                                = 'circle' 
+                                : selectedItems.stomach[1] 
+                                = 'check-circle'
                              ] 
                 });
                 break;
@@ -103,7 +119,11 @@ export const addNewScreen = () => {
                 setSelectedItems({ 
                     ...selectedItems, 
                     back: [!selectedItems.back[0], 
-                                selectedItems.back[0] ? selectedItems.back[1] = 'circle' : selectedItems.back[1] = 'check-circle'
+                                selectedItems.back[0] 
+                                ? selectedItems.back[1] 
+                                = 'circle' 
+                                : selectedItems.back[1] 
+                                = 'check-circle'
                           ] 
                 });
                 break;
@@ -119,8 +139,12 @@ export const addNewScreen = () => {
     return (
         <View style={{ flex: 1 }}>
             <Header 
-                centerComponent={{ text: '今日の成果', style: { color: '#fff', fontSize: 20 } }}
-                rightComponent={{ icon: 'home', color: '#fff' }}
+                centerComponent={{ text: '今日の成果', 
+                                　　style: { color: '#fff', fontSize: 20 } 
+                                }}
+                rightComponent={{ icon: 'home', 
+                                　color: '#fff' 
+                            　　}}
             />
             <Input value={text}
                    label="Title"
@@ -133,15 +157,34 @@ export const addNewScreen = () => {
             />
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', margin: 10}}>
                 
-                <Icon name={selectedItems.shoulder[1]} size={30} color="tomato" onPress={() => selectPart('shoulder')} />
+                <Icon name={selectedItems.shoulder[1]} 
+                    　size={30} 
+                    　color="tomato" 
+                    　onPress={() => selectPart('shoulder')} />
                 <Text h3>肩</Text>
-                <Icon name={selectedItems.arm[1]} size={30} color="orange" onPress={() => selectPart('arm')} style={{marginLeft: 15}} />
+                <Icon name={selectedItems.arm[1]} 
+                    　size={30} 
+                    　color="orange" 
+                    　onPress={() => selectPart('arm')} 
+                    　style={{marginLeft: 15}} />
                 <Text h3>腕</Text>
-                <Icon name={selectedItems.chest[1]} size={30} color="lightgreen" onPress={() => selectPart('chest')} style={{marginLeft: 15}} />
+                <Icon name={selectedItems.chest[1]} 
+                    　size={30} 
+                    　color="lightgreen" 
+                    　onPress={() => selectPart('chest')} 
+                    　style={{marginLeft: 15}} />
                 <Text h3>胸</Text>
-                <Icon name={selectedItems.stomach[1]} size={30} color="lightskyblue" onPress={() => selectPart('stomach')} style={{marginLeft: 15}} />
+                <Icon name={selectedItems.stomach[1]} 
+                    　size={30} 
+                    　color="lightskyblue" 
+                    　onPress={() => selectPart('stomach')} 
+                    　style={{marginLeft: 15}} />
                 <Text h3>腹</Text>
-                <Icon name={selectedItems.back[1]} size={30} color="plum" onPress={() => selectPart('back')} style={{marginLeft: 15}} />
+                <Icon name={selectedItems.back[1]} 
+                    　size={30} 
+                    　color="plum" 
+                    　onPress={() => selectPart('back')} 
+                    　style={{marginLeft: 15}} />
                 <Text h3>背</Text>
                 
 
