@@ -40,6 +40,9 @@ export const addNewScreen = () => {
         storage.load({key: 'weight'})
         .then(res => {setWeightData(res)})
         .catch(err => {console.warn(err)});
+        storage.load({key: 'part'})
+        .then(res => {setPartsData(res)})
+        .catch(err => {console.warn(err)});
     }
 
     const storage = new Storage({
@@ -60,6 +63,8 @@ export const addNewScreen = () => {
         const keyName = getNowYMD();
         oldData.items[keyName] = [{name: text}];
         weightData[keyName] = weight;
+        partsData[keyName] = selectedItemsConverter();
+
         storage.save({
             key: 'item',
             data: oldData
@@ -67,6 +72,10 @@ export const addNewScreen = () => {
         storage.save({
             key: 'weight',
             data: weightData
+        })
+        storage.save({
+            key: 'part',
+            data: partsData
         })
     }
 
@@ -78,7 +87,7 @@ export const addNewScreen = () => {
                 newPartsData.dots.push(selectedItem);
             }
         }
-        console.log(newPartsData);
+        return newPartsData;
     }
 
     useEffect(() => {
