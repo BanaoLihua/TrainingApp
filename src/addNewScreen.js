@@ -61,7 +61,7 @@ export const addNewScreen = () => {
     // 保存処理
     const onPressSave = () => {
         const keyName = getNowYMD();
-        oldData.items[keyName] = [{name: text}];
+        oldData.items[keyName] = [{name: text, weight: weight, parts: selectedItemsTranslater()}];
         weightData[keyName] = weight;
         partsData[keyName] = selectedItemsConverter();
 
@@ -170,6 +170,23 @@ export const addNewScreen = () => {
         
     }
 
+    // 選択した部位を漢字に直す関数
+    const selectedItemsTranslater = () => {
+        const selectedItemsJapanese = [];
+        for(const selectedItem in selectedItems) {
+            if(selectedItems[selectedItem][0]) {
+                switch(selectedItem) {
+                    case 'shoulder': selectedItemsJapanese.push('肩');break;
+                    case 'arm': selectedItemsJapanese.push('腕');break;
+                    case 'chest': selectedItemsJapanese.push('胸');break;
+                    case 'stomach': selectedItemsJapanese.push('腹');break;
+                    case 'back': selectedItemsJapanese.push('背');break;
+                }
+            }
+        };
+        return selectedItemsJapanese.join('、');
+    }
+
     const onPressTest = () => {
         selectedItemsConverter();
     }
@@ -201,31 +218,31 @@ export const addNewScreen = () => {
                     　size={30} 
                     　color={selectedItems.shoulder[2]}
                     　onPress={() => selectPart('shoulder')} />
-                <Text h3>肩</Text>
+                <Text style={{fontSize: 20}}>肩</Text>
                 <Icon name={selectedItems.arm[1]} 
                     　size={30} 
                     　color={selectedItems.arm[2]}
                     　onPress={() => selectPart('arm')} 
                     　style={{marginLeft: 15}} />
-                <Text h3>腕</Text>
+                <Text style={{fontSize: 20}}>腕</Text>
                 <Icon name={selectedItems.chest[1]} 
                     　size={30} 
                     　color={selectedItems.chest[2]}
                     　onPress={() => selectPart('chest')} 
                     　style={{marginLeft: 15}} />
-                <Text h3>胸</Text>
+                <Text style={{fontSize: 20}}>胸</Text>
                 <Icon name={selectedItems.stomach[1]} 
                     　size={30} 
                     　color={selectedItems.stomach[2]}
                     　onPress={() => selectPart('stomach')} 
                     　style={{marginLeft: 15}} />
-                <Text h3>腹</Text>
+                <Text style={{fontSize: 20}}>腹</Text>
                 <Icon name={selectedItems.back[1]} 
                     　size={30} 
                     　color={selectedItems.back[2]}
                     　onPress={() => selectPart('back')} 
                     　style={{marginLeft: 15}} />
-                <Text h3>背</Text>
+                <Text style={{fontSize: 20}}>背</Text>
                 
 
             </View>

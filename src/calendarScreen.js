@@ -16,20 +16,16 @@ export const calendarScreen = () => {
     // アジェンダ内容のJSXを返す関数
     const renderItem = (item, firstItemInDay) => {
         return (
-          <TouchableOpacity>
-            <Text style={{color: 'black'}}>{moment(item.start).format("hh:mm a")}</Text>
-            <Text style={{color: '#555'}}>{item.name}</Text>
-          </TouchableOpacity>
+        <View style={{flex: 1, justifyContent: 'center'}}>
+            <TouchableOpacity>
+                <Text style={{color: 'black'}}>{item.name}</Text>
+                <Text style={{color: '#555'}}>体重：{item.weight}</Text>  
+                <Text style={{color: '#555'}}>鍛えた部位：{item.parts}</Text>  
+
+            </TouchableOpacity>
+        </View>
         );
       } 
-    
-
-    // 日の印
-    const shoulder = {key: 'shoulder', color: 'tomato'};
-    const arm = {key: 'arm', color: 'orange'};
-    const chest = {key: 'chest', color: 'lightgreen'};
-    const stomach = {key: 'stomach', color: 'lightskyblue'};
-    const back = {key: 'back', color: 'plum'};
     
     // 日の印(テスト)
     const type1 = {key:'type1', color: 'blue'};
@@ -88,6 +84,7 @@ export const calendarScreen = () => {
             })
             .catch(err => console.warn(err));
 
+            console.log(items)
         });
         return unsubscribe;
     }, [items]);
@@ -100,6 +97,7 @@ export const calendarScreen = () => {
             <Agenda
                 items={items}
                 renderItem={(item, firstItemInDay) => { return (renderItem(item, firstItemInDay))}}
+                renderEmptyDate={() => {return (<View />);}}
                 markedDates={markedDates}
                 markingType={'multi-dot'}
             />
