@@ -25,11 +25,11 @@ export const addNewScreen = () => {
 
     // 部位選択
     const [selectedItems, setSelectedItems] = useState({ 
-        shoulder: [false, 'circle'], 
-        arm: [false, 'circle'], 
-        chest: [false, 'circle'], 
-        stomach: [false, 'circle'], 
-        back: [false, 'circle']
+        shoulder: [false, 'circle', 'tomato'], 
+        arm: [false, 'circle', 'orange'], 
+        chest: [false, 'circle', 'lightgreen'], 
+        stomach: [false, 'circle', 'lightskyblue'], 
+        back: [false, 'circle', 'plum']
     });
     //
 
@@ -84,7 +84,7 @@ export const addNewScreen = () => {
         const newPartsData = { dots: [] };
         for(const selectedItem in selectedItems) {
             if(selectedItems[selectedItem][0]) {
-                newPartsData.dots.push(selectedItem);
+                newPartsData.dots.push({color: selectedItems[selectedItem][2], key: selectedItem});
             }
         }
         return newPartsData;
@@ -109,7 +109,8 @@ export const addNewScreen = () => {
                                 ? selectedItems.shoulder[1] 
                                 = 'circle' 
                                 : selectedItems.shoulder[1] 
-                                = 'check-circle'
+                                = 'check-circle',
+                                selectedItems.shoulder[2]
                               ] 
                 });
                 break;
@@ -121,7 +122,8 @@ export const addNewScreen = () => {
                                 ? selectedItems.arm[1] 
                                 = 'circle' 
                                 : selectedItems.arm[1] 
-                                = 'check-circle'
+                                = 'check-circle',
+                                selectedItems.arm[2]
                          ] 
                 });
                 break;
@@ -133,7 +135,8 @@ export const addNewScreen = () => {
                                 ? selectedItems.chest[1] 
                                 = 'circle' 
                                 : selectedItems.chest[1] 
-                                = 'check-circle'
+                                = 'check-circle',
+                                selectedItems.chest[2]
                            ] 
                 });
                 break;
@@ -145,7 +148,8 @@ export const addNewScreen = () => {
                                 ? selectedItems.stomach[1] 
                                 = 'circle' 
                                 : selectedItems.stomach[1] 
-                                = 'check-circle'
+                                = 'check-circle',
+                                selectedItems.stomach[2]
                              ] 
                 });
                 break;
@@ -157,7 +161,8 @@ export const addNewScreen = () => {
                                 ? selectedItems.back[1] 
                                 = 'circle' 
                                 : selectedItems.back[1] 
-                                = 'check-circle'
+                                = 'check-circle',
+                                selectedItems.back[2]
                           ] 
                 });
                 break;
@@ -194,30 +199,30 @@ export const addNewScreen = () => {
                 
                 <Icon name={selectedItems.shoulder[1]} 
                     　size={30} 
-                    　color="tomato" 
+                    　color={selectedItems.shoulder[2]}
                     　onPress={() => selectPart('shoulder')} />
                 <Text h3>肩</Text>
                 <Icon name={selectedItems.arm[1]} 
                     　size={30} 
-                    　color="orange" 
+                    　color={selectedItems.arm[2]}
                     　onPress={() => selectPart('arm')} 
                     　style={{marginLeft: 15}} />
                 <Text h3>腕</Text>
                 <Icon name={selectedItems.chest[1]} 
                     　size={30} 
-                    　color="lightgreen" 
+                    　color={selectedItems.chest[2]}
                     　onPress={() => selectPart('chest')} 
                     　style={{marginLeft: 15}} />
                 <Text h3>胸</Text>
                 <Icon name={selectedItems.stomach[1]} 
                     　size={30} 
-                    　color="lightskyblue" 
+                    　color={selectedItems.stomach[2]}
                     　onPress={() => selectPart('stomach')} 
                     　style={{marginLeft: 15}} />
                 <Text h3>腹</Text>
                 <Icon name={selectedItems.back[1]} 
                     　size={30} 
-                    　color="plum" 
+                    　color={selectedItems.back[2]}
                     　onPress={() => selectPart('back')} 
                     　style={{marginLeft: 15}} />
                 <Text h3>背</Text>
