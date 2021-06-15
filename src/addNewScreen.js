@@ -199,7 +199,7 @@ export const addNewScreen = () => {
             onPress={() => {
                 Keyboard.dismiss()
             }}>
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, alignItems: 'center' }}>
                 <Header 
                     centerComponent={{ text: '今日の成果', 
                                     　　style: { color: '#fff', fontSize: 20 } 
@@ -255,14 +255,15 @@ export const addNewScreen = () => {
                 </View>
                 
                 <Button title="保存"
-                        style={{ margin: 30 }}
+                        style={{ margin: 30, width: 60 }}
                         onPress={ onPressSave }
                 />
-
+                {/*
                 <Button title="テスト"
                         style={{ margin: 30 }}
                         onPress={ onPressTest }
                 />
+                */}
             </View>
         </TouchableWithoutFeedback>
     );
