@@ -16,11 +16,11 @@ export const calendarScreen = () => {
     // アジェンダ内容のJSXを返す関数
     const renderItem = (item, firstItemInDay) => {
         return (
-        <View style={{flex: 1, justifyContent: 'center'}}>
+        <View style={{flex: 1, justifyContent: 'flex-end'}}>
             <TouchableOpacity>
-                <Text style={{color: 'black'}}>{item.name}</Text>
+                <Text style={{color: 'black', fontSize: 20}}>{item.name}</Text>
                 <Text style={{color: '#555'}}>体重：{item.weight}</Text>  
-                <Text style={{color: '#555'}}>鍛えた部位：{item.parts}</Text>  
+                <Text style={{color: '#555'}}>部位：{item.parts}</Text>  
 
             </TouchableOpacity>
         </View>
@@ -83,8 +83,6 @@ export const calendarScreen = () => {
                 setMarkedDates(res);
             })
             .catch(err => console.warn(err));
-
-            console.log(items)
         });
         return unsubscribe;
     }, [items]);

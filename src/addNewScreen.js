@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableWithoutFeedback, Keyboard } from 'react-native';
 //import { saveData } from './store';
 import { useNavigation } from '@react-navigation/native';
 //import { Button, TextInput } from 'react-native-paper';
@@ -72,11 +72,13 @@ export const addNewScreen = () => {
         storage.save({
             key: 'weight',
             data: weightData
-        })
+        });
         storage.save({
             key: 'part',
             data: partsData
-        })
+        });
+
+        navigation.goBack()
     }
 
     // selectedItemsを整形する処理
@@ -193,69 +195,76 @@ export const addNewScreen = () => {
 
     const navigation = useNavigation();
     return (
-        <View style={{ flex: 1 }}>
-            <Header 
-                centerComponent={{ text: '今日の成果', 
-                                　　style: { color: '#fff', fontSize: 20 } 
-                                }}
-                rightComponent={{ icon: 'home', 
-                                　color: '#fff' 
-                            　　}}
-            />
-            <Input value={text}
-                   label="Title"
-                   onChangeText={text => setText(text)}
-            />
-            <Input
-                value={weight}
-                label="Weight"
-                keyboardType="numeric"
-                onChangeText={weight => setWeight(weight)}
-            />
-            <View style={styles.partsSelection}>
-                
-                <Icon name={selectedItems.shoulder[1]} 
-                    　size={30} 
-                    　color={selectedItems.shoulder[2]}
-                    　onPress={() => selectPart('shoulder')} />
-                <Text style={{fontSize: 20}}>肩</Text>
-                <Icon name={selectedItems.arm[1]} 
-                    　size={30} 
-                    　color={selectedItems.arm[2]}
-                    　onPress={() => selectPart('arm')} 
-                    　style={{marginLeft: 15}} />
-                <Text style={{fontSize: 20}}>腕</Text>
-                <Icon name={selectedItems.chest[1]} 
-                    　size={30} 
-                    　color={selectedItems.chest[2]}
-                    　onPress={() => selectPart('chest')} 
-                    　style={{marginLeft: 15}} />
-                <Text style={{fontSize: 20}}>胸</Text>
-                <Icon name={selectedItems.stomach[1]} 
-                    　size={30} 
-                    　color={selectedItems.stomach[2]}
-                    　onPress={() => selectPart('stomach')} 
-                    　style={{marginLeft: 15}} />
-                <Text style={{fontSize: 20}}>腹</Text>
-                <Icon name={selectedItems.back[1]} 
-                    　size={30} 
-                    　color={selectedItems.back[2]}
-                    　onPress={() => selectPart('back')} 
-                    　style={{marginLeft: 15}} />
-                <Text style={{fontSize: 20}}>背</Text>
-                
+        <TouchableWithoutFeedback
+            onPress={() => {
+                Keyboard.dismiss()
+            }}>
+            <View style={{ flex: 1 }}>
+                <Header 
+                    centerComponent={{ text: '今日の成果', 
+                                    　　style: { color: '#fff', fontSize: 20 } 
+                                    }}
+                    rightComponent={{ icon: 'home', 
+                                    　color: '#fff' ,
+                                    onPress: () => {navigation.goBack()}
+                                　　}}
+                />
+                <Input value={text}
+                    label="Title"
+                    onChangeText={text => setText(text)}
+                />
+                <Input
+                    value={weight}
+                    label="Weight"
+                    keyboardType="numeric"
+                    onChangeText={weight => setWeight(weight)}
+                />
+                <View style={styles.partsSelection}>
+                    
+                    <Icon name={selectedItems.shoulder[1]} 
+                        　size={30} 
+                        　color={selectedItems.shoulder[2]}
+                        　onPress={() => selectPart('shoulder')} />
+                    <Text style={{fontSize: 20}}>肩</Text>
+                    <Icon name={selectedItems.arm[1]} 
+                        　size={30} 
+                        　color={selectedItems.arm[2]}
+                        　onPress={() => selectPart('arm')} 
+                        　style={{marginLeft: 15}} />
+                    <Text style={{fontSize: 20}}>腕</Text>
+                    <Icon name={selectedItems.chest[1]} 
+                        　size={30} 
+                        　color={selectedItems.chest[2]}
+                        　onPress={() => selectPart('chest')} 
+                        　style={{marginLeft: 15}} />
+                    <Text style={{fontSize: 20}}>胸</Text>
+                    <Icon name={selectedItems.stomach[1]} 
+                        　size={30} 
+                        　color={selectedItems.stomach[2]}
+                        　onPress={() => selectPart('stomach')} 
+                        　style={{marginLeft: 15}} />
+                    <Text style={{fontSize: 20}}>腹</Text>
+                    <Icon name={selectedItems.back[1]} 
+                        　size={30} 
+                        　color={selectedItems.back[2]}
+                        　onPress={() => selectPart('back')} 
+                        　style={{marginLeft: 15}} />
+                    <Text style={{fontSize: 20}}>背</Text>
+                    
 
+                </View>
+                
+                <Button title="保存"
+                        style={{ margin: 30 }}
+                        onPress={ onPressSave }
+                />
+
+                <Button title="テスト"
+                        style={{ margin: 30 }}
+                        onPress={ onPressTest }
+                />
             </View>
-            
-            <Button title="テスト"
-                    style={{ margin: 30 }}
-                    onPress={ onPressTest }
-            />
-            <Button title="保存"
-                    style={{ margin: 30 }}
-                    onPress={ onPressSave }
-            />
-        </View>
+        </TouchableWithoutFeedback>
     );
 }
 
