@@ -19,7 +19,7 @@ export const calendarScreen = () => {
         <View style={{flex: 1, justifyContent: 'flex-end'}}>
             <TouchableOpacity>
                 <Text style={{color: 'black', fontSize: 20}}>{item.name}</Text>
-                <Text style={{color: '#555'}}>体重：{item.weight}</Text>  
+                <Text style={{color: '#555'}}>体重：{item.weight}kg</Text>  
                 <Text style={{color: '#555'}}>部位：{item.parts}</Text>  
 
             </TouchableOpacity>

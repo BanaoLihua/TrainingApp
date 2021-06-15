@@ -20,18 +20,18 @@ export default function App() {
         tabBarIcon: ({focused}) => {
           let iconName;
           let color;
-          if(route.name === 'calendar') {
+          if(route.name === 'トレーニング記録') {
             iconName = 'calendar';
             color = focused ? 'dodgerblue' : 'gray';
-          }else if(route.name === 'addNew') {
+          }else if(route.name === '今日の成果') {
             iconName = 'plus-circle';
             color = focused ? 'dodgerblue' : 'gray';
           }
           return <Icon name={iconName} size={30} color={color} />
         }
       })}>
-        <Tab.Screen name="calendar" component={calendarScreen} />
-        <Tab.Screen name="addNew" component={addNewScreen} />
+        <Tab.Screen name="トレーニング記録" component={calendarScreen} />
+        <Tab.Screen name="今日の成果" component={addNewScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
