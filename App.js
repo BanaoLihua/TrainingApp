@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { calendarScreen } from './src/calendarScreen';
 import { addNewScreen } from './src/addNewScreen';
+import graphScreen from './src/graphScreen'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
@@ -32,6 +33,7 @@ export default function App() {
       })}>
         <Tab.Screen name="トレーニング記録" component={calendarScreen} />
         <Tab.Screen name="今日の成果" component={addNewScreen} />
+        <Tab.Screen name="グラフ"　component={graphScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
