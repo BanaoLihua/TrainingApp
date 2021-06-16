@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { View, StyleSheet, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { View, StyleSheet, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 //import { saveData } from './store';
 import { useNavigation } from '@react-navigation/native';
 //import { Button, TextInput } from 'react-native-paper';
@@ -79,7 +79,18 @@ export const addNewScreen = () => {
             data: partsData
         });
 
-        navigation.goBack()
+        // 画面遷移時に値の初期化とアラート
+        setText('');
+        setWeight();
+        setSelectedItems({ 
+            shoulder: [false, 'circle', 'tomato'], 
+            arm: [false, 'circle', 'orange'], 
+            chest: [false, 'circle', 'lightgreen'], 
+            stomach: [false, 'circle', 'lightskyblue'], 
+            back: [false, 'circle', 'plum']
+        })
+        Alert.alert('trainingApp', '今日の成果を記録しました！')
+        navigation.navigate('トレーニング記録');
     }
 
     // selectedItemsを整形する処理

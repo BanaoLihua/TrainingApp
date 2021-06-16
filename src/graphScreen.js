@@ -4,7 +4,7 @@
 
 
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, SafeAreaView, Button, View, TouchableWithoutFeedback } from "react-native";
+import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { ECharts } from "react-native-echarts-wrapper";
 
 import Storage from 'react-native-storage';
@@ -28,14 +28,11 @@ export const graphScreen = () => {
             .then(res => {
             setDateData(Object.keys(res).map((e) => {return e.slice(5)}));
             setWeightData(Object.values(res).map(Number))
-            console.log(weightData);
-            console.log(dateData);
             })
             .catch(err => {console.warn(err)})
         })
         return unsubscribe;
     }, [weightData])
-    
 
     const option = {
         tooltip: {
