@@ -1,28 +1,87 @@
-import React, { Component } from "react";
+// https://github.com/tomLadder/react-native-echarts-wrapper#how-to-use
+// https://echarts.apache.org/en/index.html
+// echartの使い方は上を参照
+
+
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, SafeAreaView, Button } from "react-native";
 import { ECharts } from "react-native-echarts-wrapper";
 
-export default class App extends Component {
-  option = {
+import Storage from 'react-native-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+
+export const graphScreen = () => {
+
+    const [weightData, setWeightData] = useState([]);
+    const [dateData, setDateData] = useState([]);
+
+    const storage = new Storage({
+        storageBackend: AsyncStorage
+    });
+    const navigation = useNavigation();
+
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            storage.load({key: 'weight'})
+            .then(res => {
+            setDateData(Object.keys(res));
+            setWeightData(Object.values(res).map(Number))
+            console.log(weightData);
+            console.log(dateData);
+            })
+            .catch(err => {console.warn(err)})
+        })
+        return unsubscribe;
+    }, [weightData])
+    
+
+  const option = {
+    tooltip: {
+        trigger: "axis",
+        formattar: function(params) {
+            params = params[0];
+            var date = new Date(params.name);
+            return (
+                date.getDate() +
+                "/" +
+                (date.getMonth() + 1) +
+                "/" +
+                date.getFullYear() +
+                " : " +
+                params.value[1]
+            );
+        },
+        axisPointer: {
+            animation: false
+        }
+    },
     xAxis: {
       type: "category",
-      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+      data: dateData
     },
     yAxis: {
       type: "value"
     },
+    dataZoom: [{
+        show: true,
+        type: 'inside',
+        filterMode: 'none',
+        yAxisIndex: [0],
+        startValue: 40,
+        endValue: 70
+    }],
     series: [
       {
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
+        data: weightData,
         type: "line"
       }
     ]
   };
 
-// https://github.com/tomLadder/react-native-echarts-wrapper#how-to-use
-// tooltipがグラフタッチしたときに出てくるやつ
 
-  additionalCode = `
+
+  const additionalCode = `
         chart.on('click', function(param) {
             var obj = {
             type: 'event_clicked',
@@ -33,7 +92,7 @@ export default class App extends Component {
         });
     `;
 
-  onData = param => {
+  const onData = param => {
     const obj = JSON.parse(param);
 
     if (obj.type === "event_clicked") {
@@ -41,34 +100,23 @@ export default class App extends Component {
     }
   };
 
-  onRef = ref => {
+  const onRef = ref => {
     if (ref) {
-      this.chart = ref;
+      chart = ref;
     }
   };
 
-  onButtonClearPressed = () => {
-    this.chart.clear();
-  };
-
-  render() {
     return (
-      <SafeAreaView style={styles.chartContainer}>
-        <Button title="Clear" onPress={this.onButtonClearPressed} />
-
+        <SafeAreaView style={styles.chartContainer}>
         <ECharts
-          ref={this.onRef}
-          option={this.option}
-          additionalCode={this.additionalCode}
-          onData={this.onData}
-          onLoadEnd={() => {
-            this.chart.setBackgroundColor("rgba(93, 169, 81, 0.1)");
-          }}
+            ref={onRef}
+            option={option}
+            additionalCode={additionalCode}
+            onData={onData}
         />
-      </SafeAreaView>
-    );
-  }
-}
+        </SafeAreaView>
+    );}
+  
 
 const styles = StyleSheet.create({
   chartContainer: {

@@ -7,7 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { calendarScreen } from './src/calendarScreen';
 import { addNewScreen } from './src/addNewScreen';
-import graphScreen from './src/graphScreen'
+import {graphScreen} from './src/graphScreen'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
