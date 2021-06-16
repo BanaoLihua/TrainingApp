@@ -27,6 +27,9 @@ export default function App() {
           }else if(route.name === '今日の成果') {
             iconName = 'plus-circle';
             color = focused ? 'dodgerblue' : 'gray';
+          }else if(route.name === 'グラフ') {
+            iconName = 'line-chart';
+            color = focused ? 'dodgerblue' : 'gray';
           }
           return <Icon name={iconName} size={30} color={color} />
         }

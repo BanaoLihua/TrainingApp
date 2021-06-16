@@ -46,7 +46,8 @@ export const addNewScreen = () => {
     }
 
     const storage = new Storage({
-        storageBackend: AsyncStorage
+        storageBackend: AsyncStorage,
+        defaultExpires: null
     })
 
 
