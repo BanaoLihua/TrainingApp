@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { View, StyleSheet, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
-//import { saveData } from './store';
 import { useNavigation } from '@react-navigation/native';
-//import { Button, TextInput } from 'react-native-paper';
 import Storage from 'react-native-storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Header, Input, Text, Button } from 'react-native-elements';
@@ -15,7 +13,7 @@ export const addNewScreen = () => {
 
     const [weight, setWeight] = useState();
 
-    const [oldData, setOldData] = useState({
+    const [itemData, setItemData] = useState({
         items: {}
     });
 
@@ -23,7 +21,6 @@ export const addNewScreen = () => {
 
     const [partsData, setPartsData] = useState({})
 
-    // 部位選択
     const [selectedItems, setSelectedItems] = useState({ 
         shoulder: [false, 'circle', 'tomato'], 
         arm: [false, 'circle', 'orange'], 
@@ -31,11 +28,10 @@ export const addNewScreen = () => {
         stomach: [false, 'circle', 'lightskyblue'], 
         back: [false, 'circle', 'plum']
     });
-    //
 
     const loadData = () => {
         storage.load({key: 'item'})
-        .then(res => {setOldData(res)})
+        .then(res => {setItemData(res)})
         .catch(err => {console.warn(err)});
         storage.load({key: 'weight'})
         .then(res => {setWeightData(res)})
@@ -50,7 +46,6 @@ export const addNewScreen = () => {
         defaultExpires: null
     })
 
-
     const getNowYMD = () => {
         const dt = new Date();
         const y = dt.getFullYear();
@@ -62,13 +57,13 @@ export const addNewScreen = () => {
     // 保存処理
     const onPressSave = () => {
         const keyName = getNowYMD();
-        oldData.items[keyName] = [{name: text, weight: weight, parts: selectedItemsTranslater()}];
+        itemData.items[keyName] = [{name: text, weight: weight, parts: selectedItemsTranslater()}];
         weightData[keyName] = weight;
         partsData[keyName] = selectedItemsConverter();
 
         storage.save({
             key: 'item',
-            data: oldData
+            data: itemData
         });
         storage.save({
             key: 'weight',
@@ -181,7 +176,6 @@ export const addNewScreen = () => {
                 });
                 break;
         }
-        
     }
 
     // 選択した部位を漢字に直す関数
@@ -201,11 +195,8 @@ export const addNewScreen = () => {
         return selectedItemsJapanese.join('、');
     }
 
-    const onPressTest = () => {
-        selectedItemsConverter();
-    }
-
     const navigation = useNavigation();
+
     return (
         <TouchableWithoutFeedback
             onPress={() => {
@@ -218,7 +209,7 @@ export const addNewScreen = () => {
                                     }}
                     rightComponent={{ icon: 'home', 
                                     　color: '#fff' ,
-                                    onPress: () => {navigation.goBack()}
+                                    onPress: () => {navigation.navigate('トレーニング記録')}
                                 　　}}
                 />
                 <Input value={text}
@@ -231,8 +222,7 @@ export const addNewScreen = () => {
                     keyboardType="numeric"
                     onChangeText={weight => setWeight(weight)}
                 />
-                <View style={styles.partsSelection}>
-                    
+                <View style={styles.partsSelection}>                    
                     <Icon name={selectedItems.shoulder[1]} 
                         　size={30} 
                         　color={selectedItems.shoulder[2]}
@@ -262,20 +252,11 @@ export const addNewScreen = () => {
                         　onPress={() => selectPart('back')} 
                         　style={{marginLeft: 15}} />
                     <Text style={{fontSize: 20}}>背</Text>
-                    
-
-                </View>
-                
+                </View>                
                 <Button title="保存"
                         style={{ margin: 30, width: 60 }}
                         onPress={ onPressSave }
                 />
-                {/*
-                <Button title="テスト"
-                        style={{ margin: 30 }}
-                        onPress={ onPressTest }
-                />
-                */}
             </View>
         </TouchableWithoutFeedback>
     );
