@@ -57,7 +57,11 @@ export const graphScreen = () => {
             <View style={styles.chartContainer}>
                 <Header centerComponent={{ text: '体重の推移', 
                                         　　style: { color: '#fff', fontSize: 20 } 
-                                        }} />
+                                        }}
+                        rightComponent={{ icon: 'home', 
+                                        　color: '#fff' ,
+                                        onPress: () => {navigation.navigate('トレーニング記録')}
+                                    　　}} />
                 <ECharts option={option} />
             </View>
         </TouchableWithoutFeedback>
