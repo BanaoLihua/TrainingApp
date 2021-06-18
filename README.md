@@ -21,13 +21,13 @@ You can use a easily visible calendar and chart.
  
 # Installation
  
-For Android user: It'a all that you "install MyTrainer.apk".
+For Android user: It's all that you install "release/MyTrainer.apk"".
 
 For iOS user: 
 
 1. Get application source from my repository.
 
-```bash
+```
 git clone https://github.com/BanaoLihua/TrainingApp
 ```
 
@@ -35,19 +35,25 @@ git clone https://github.com/BanaoLihua/TrainingApp
 
 3. Install Expo.
 
-```bash
+```
 npm install -g expo-cli
 ```
 
-4. Install "Expo Go" on your iOS device from App store.
- 
-5. Move to TrainigApp foloder and build the application.
+4. Install node modules.
 
-```bash
+```
+npm install
+```
+
+5. Install "Expo Go" on your iOS device from App store.
+ 
+6. Move to TrainigApp folder and build the application.
+
+```
 expo start
 ```
 
-6. After you scan QR code on the screen, you can use the application!
+7. After you scan QR code on the screen, you can use the application!
  
 # Note
  
