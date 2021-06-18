@@ -25,9 +25,11 @@ export const calendarScreen = () => {
         );
       } 
     
-    const storage = new Storage({
-        storageBackend: AsyncStorage
-    })
+      const storage = new Storage({
+        storageBackend: AsyncStorage,
+        defaultExpires: null,
+        enableCache: true,
+    });
     const [items, setItems] = useState();
     const [markedDates, setMarkedDates] = useState();
 

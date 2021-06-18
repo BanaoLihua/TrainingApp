@@ -13,7 +13,9 @@ export const graphScreen = () => {
     const [dateData, setDateData] = useState([]);
 
     const storage = new Storage({
-        storageBackend: AsyncStorage
+        storageBackend: AsyncStorage,
+        defaultExpires: null,
+        enableCache: true,
     });
 
     const navigation = useNavigation();

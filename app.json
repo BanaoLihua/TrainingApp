@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "trainig-app",
+    "name": "My Trainer",
     "slug": "trainig-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -17,9 +17,15 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.github.BanaoLihua.TrainingApp",
+      "buildNumber": "100",
+      "icon": "./assets/icon.png",
+      "supportsTablet": true 
     },
     "android": {
+      "package": "com.github.BanaoLihua.TrainingApp",
+      "versionCode": 100,
+      "icon": "./assets/icon.png",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"

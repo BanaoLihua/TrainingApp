@@ -43,8 +43,9 @@ export const addNewScreen = () => {
 
     const storage = new Storage({
         storageBackend: AsyncStorage,
-        defaultExpires: null
-    })
+        defaultExpires: null,
+        enableCache: true,
+    });
 
     const getNowYMD = () => {
         const dt = new Date();
