@@ -6,11 +6,11 @@
  
 You can use a easily visible calendar and chart.
 
-![Calendar View](/demo/demo1.png)
+![Calendar View](https://github.com/BanaoLihua/TrainingApp/blob/main/demo/demo1.gif)
 
-![Add new View](/demo/demo2.png)
+![Add new View](https://github.com/BanaoLihua/TrainingApp/blob/main/demo/demo2.gif)
 
-![chart View](/demo/demo3.png)
+![chart View](https://github.com/BanaoLihua/TrainingApp/blob/main/demo/demo3.gif)
  
 # Requirement
  
