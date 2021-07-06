@@ -57,5 +57,8 @@ expo start
  
 # Note
  
-You can't install .ipa on your iOS device because I don't have developer account.
+If you want to install this app on iPhone, email to me and receive testflight code.
+
+# Contact
+tatitachi870@gmail.com
  
